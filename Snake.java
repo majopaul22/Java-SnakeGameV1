@@ -8,6 +8,7 @@ public class Snake {
     boolean isMoving, elongated;
     final int STARTSIZE = 20, STARTX = 150, STARTY = 150;
     List<Point> snakePoints;
+
     public Snake(){
         xDir = 0;
         yDir = 0;
@@ -42,10 +43,22 @@ public class Snake {
         return yDir;
     }
 
+    public boolean snakeCollision() {
+        int x = this.getX();
+        int y = this.getY();
+        for (int i = 1; i < snakePoints.size(); i++) {
+            if (snakePoints.get(i).getX() == x && snakePoints.get(i).getY() == y)
+                return true;
+        }
+        return false;
+    }
     public boolean isMoving() {
         return isMoving;
     }
 
+    public void setElongated(boolean elongated) {
+        this.elongated = elongated;
+    }
     public void setMoving(boolean moving) {
         isMoving = moving;
     }
@@ -61,11 +74,13 @@ public class Snake {
             Point last = snakePoints.get(snakePoints.size()-1);
             Point newStart = new Point(temp.getX()+ xDir *4, temp.getY()+ yDir *4);
             for (int i = snakePoints.size()-1; i >= 1; i--) {
-                System.out.println("snake moving : " + i + ", " + ".");
                 snakePoints.set(i, snakePoints.get(i - 1));
             }
             snakePoints.set(0, newStart);
-            System.out.println("snake move: " + newStart.getX() + ", " + newStart.getY());
+            if(elongated) {
+                snakePoints.add(last);
+                elongated = false;
+            }
         }
     }
 }
