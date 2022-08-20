@@ -11,7 +11,7 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
     Snake snake;
 
     public void init(){
-        this.resize(400, 400);
+//        this.resize(400, 400);
         img = createImage(400, 400);
         gfx = img.getGraphics();
         this.addKeyListener(this);
@@ -26,10 +26,10 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
         g.drawImage(img,0,0,null);
     }
     public void repaint(Graphics g){
-
+        paint(g);
     }
     public void update(Graphics g){
-
+        paint(g);
     }
 
     public void run() {
